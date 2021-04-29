@@ -33,14 +33,36 @@ class App extends React.Component {
           pets: petsArr
       })
     })
-    console.log(URL)
+    // console.log(URL)
   }
 
   onAdoptPet = (petId) => {
     let clickedPet =  this.state.pets.find((pet) => {
      return pet.id === petId
     })
-     console.log(clickedPet)
+    
+    let clickedPetIndex = this.state.pets.indexOf(clickedPet)
+    clickedPet.isAdopted = true
+    let firstHalf = this.state.pets.slice(0, clickedPetIndex)
+    console.log(firstHalf)
+    let secondHalf = this.state.pets.slice(clickedPetIndex+1)
+    console.log(secondHalf)
+
+    this.setState({
+      pets: [...firstHalf, clickedPet, ...secondHalf]
+    }, console.log(this.state.pets))
+    
+    
+    // this.setState({
+    //   pets: [
+    //     ...this.state.pets.slice(0, clickedPetIndex),
+    //     {
+    //       ...this.state.pets[clickedPetIndex],
+    //       isAdopted: true
+    //     },
+    //     ...this.state.pets.slice(clickedPetIndex)
+    //   ]
+    // }, console.log(this.state.pets[clickedPetIndex]))
   }
 
   // componentDidMount(){
